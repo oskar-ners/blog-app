@@ -1,1 +1,49 @@
-<p>blog works!</p>
+<app-logout-button></app-logout-button>
+
+<!-- add post  -->
+<form class="add-post-form"
+      #form="ngForm"
+      (ngSubmit)="addPost(title, description)">
+    <input class="add-post-title"
+           type="text"
+           name="title"
+           id="title"
+           placeholder="Title"
+           [(ngModel)]="title">
+    <textarea class="add-post-description"
+              name="description"
+              id="description"
+              placeholder="Description"
+              [(ngModel)]="description"></textarea>
+    <button type="submit">Add Post</button>
+</form>
+
+<!-- list of posts -->
+<h1>List of posts ({{blogPosts.length}})</h1>
+<div class="list-of-posts">
+    @for(post of blogPosts; track post.title) {
+    <div class="post">
+        @if(blogService.isEditing | async) {
+        <input class="edit-post-title"
+               type="text"
+               name="edit-title"
+               id="edit-title"
+               placeholder="Edit title"
+               [(ngModel)]="editTitle">
+        <textarea class="edit-post-description"
+                  name="edit-description"
+                  id="edit-description"
+                  placeholder="Edit description"
+                  [(ngModel)]="editDescription"></textarea>
+        <button (click)="editPost(post)">Edit Post</button>
+        } @else {
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p class="post-description">{{ post.description }}</p>
+        <button (click)="removePost(post)"
+                class="post-remove">Remove Post</button>
+        <button (click)="blogService.isEditing.next(true)"
+                class="edit-post">Edit Post</button>
+        }
+    </div>
+    }
+</div>
