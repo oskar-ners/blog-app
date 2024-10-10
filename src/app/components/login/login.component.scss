@@ -27,12 +27,12 @@ $font-family: "Arial", sans-serif;
   }
 
   .login-form {
+    max-width: 90% !important;
     background: white;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     padding: 30px;
-    width: 100%;
-    max-width: 400px;
+    width: 700px;
 
     .form-title {
       font-size: 1.8rem;
@@ -49,7 +49,7 @@ $font-family: "Arial", sans-serif;
         margin-bottom: 20px;
 
         .input-field {
-          width: 100%;
+          width: 97%;
           padding: 10px;
           border: 1px solid #ccc;
           border-radius: 5px;
