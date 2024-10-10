@@ -6,6 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { Auth } from '@angular/fire/auth';
 import { LogoutButtonComponent } from '../logout-button/logout-button.component';
 import { AsyncPipe } from '@angular/common';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 @Component({
   selector: 'app-blog',
@@ -24,6 +25,7 @@ export class BlogComponent implements OnInit {
   editDescription: string = '';
   blogPosts: BlogPost[] = [];
   editingPost: BlogPost | null = null;
+  imageFile: File | null = null;
 
   async ngOnInit(): Promise<void> {
     onAuthStateChanged(this.firebaseAuth, async (user) => {
@@ -33,12 +35,31 @@ export class BlogComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length) {
+      this.imageFile = input.files[0];
+    }
+  }
+
   async addPost(title: string, description: string): Promise<void> {
     if (!title || !description) return;
-    await this.blogService.addPost(title, description);
+
+    let imageUrl: string | null = null;
+    if (this.imageFile) {
+      const storage = getStorage();
+      const storageRef = ref(storage, `images/${this.imageFile.name}`);
+
+      await uploadBytes(storageRef, this.imageFile).then(async () => {
+        imageUrl = await getDownloadURL(storageRef);
+      });
+    }
+
+    await this.blogService.addPost(title, description, imageUrl);
     this.blogPosts = await this.blogService.getPosts();
     this.title = '';
     this.description = '';
+    this.imageFile = null;
   }
 
   async removePost(post: BlogPost): Promise<void> {

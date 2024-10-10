@@ -15,6 +15,8 @@
               id="description"
               placeholder="Description"
               [(ngModel)]="description"></textarea>
+    <input type="file"
+           (change)="onFileSelected($event)" />
     <button type="submit">Add Post</button>
 </form>
 
@@ -39,6 +41,10 @@
         } @else {
         <h2 class="post-title">{{ post.title }}</h2>
         <p class="post-description">{{ post.description }}</p>
+        @if(post.imageUrl) {
+        <img [src]="post.imageUrl"
+             alt="Post image" />
+        }
         <button (click)="removePost(post)"
                 class="post-remove">Remove Post</button>
         <button (click)="startEditing(post)"

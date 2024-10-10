@@ -19,12 +19,21 @@ export class BlogService {
   firestore = inject(Firestore);
   firebaseAuth = inject(Auth);
 
-  async addPost(title: string, description: string): Promise<void> {
+  async addPost(
+    title: string,
+    description: string,
+    imageUrl: string | null
+  ): Promise<void> {
     const uid = this.firebaseAuth.currentUser?.uid;
 
     try {
       const userDocRef = doc(this.firestore, `users/${uid}`);
-      const post = { title: title, description: description, comments: [] };
+      const post = {
+        title: title,
+        description: description,
+        imageUrl: imageUrl,
+        comments: [],
+      };
       await updateDoc(userDocRef, {
         posts: arrayUnion(post),
       });
