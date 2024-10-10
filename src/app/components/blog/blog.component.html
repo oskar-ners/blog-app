@@ -9,12 +9,14 @@
            name="title"
            id="title"
            placeholder="Title"
-           [(ngModel)]="title">
+           [(ngModel)]="title"
+           required>
     <textarea class="add-post-description"
               name="description"
               id="description"
               placeholder="Description"
-              [(ngModel)]="description"></textarea>
+              [(ngModel)]="description"
+              required></textarea>
     <input type="file"
            (change)="onFileSelected($event)" />
     <button type="submit">Add Post</button>
@@ -31,16 +33,19 @@
                name="edit-title"
                id="edit-title"
                placeholder="Edit title"
-               [(ngModel)]="editTitle">
+               [(ngModel)]="editTitle"
+               required>
         <textarea class="edit-post-description"
                   name="edit-description"
                   id="edit-description"
                   placeholder="Edit description"
-                  [(ngModel)]="editDescription"></textarea>
+                  [(ngModel)]="editDescription"
+                  required></textarea>
         <button (click)="editPost()">Save Changes</button>
         } @else {
         <h2 class="post-title">{{ post.title }}</h2>
         <p class="post-description">{{ post.description }}</p>
+        <p class="post-date">{{ post.createdAt?.toDate() | date:'short' }}</p>
         @if(post.imageUrl) {
         <img [src]="post.imageUrl"
              alt="Post image" />

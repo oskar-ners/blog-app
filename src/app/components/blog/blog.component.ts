@@ -5,13 +5,13 @@ import { BlogPost } from '../../interfaces/blog-post.interface';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Auth } from '@angular/fire/auth';
 import { LogoutButtonComponent } from '../logout-button/logout-button.component';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [FormsModule, AsyncPipe, LogoutButtonComponent],
+  imports: [FormsModule, AsyncPipe, DatePipe, LogoutButtonComponent],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.scss',
 })

@@ -6,11 +6,11 @@ import {
   arrayUnion,
   doc,
   getDoc,
+  Timestamp,
   updateDoc,
 } from 'firebase/firestore';
 import { BlogPost } from '../interfaces/blog-post.interface';
 import { onAuthStateChanged } from 'firebase/auth';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +32,7 @@ export class BlogService {
         title: title,
         description: description,
         imageUrl: imageUrl,
+        createdAt: Timestamp.now(),
         comments: [],
       };
       await updateDoc(userDocRef, {
