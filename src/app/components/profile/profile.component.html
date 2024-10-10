@@ -1,14 +1,15 @@
 <div class="profile-container">
-    <h1>Profile</h1>
-    <div class="profile-info">
-        <h2>{{ user?.username }}</h2>
-        <h3>Email: {{ user?.email }}</h3>
-        @if(photoURL) {
-        <img [src]="
-                 photoURL"
-             alt="{{ user?.username }}'s profile picture"
-             class="profile-picture" />
-        }
-
+    <div class="profile-card">
+        <div class="profile-image">
+            @if(photoURL) {
+            <img [src]="photoURL"
+                 alt="{{ user?.username }}'s profile picture"
+                 class="profile-picture" />
+            }
+        </div>
+        <div class="profile-details">
+            <h1 class="username">Username: {{ user?.username }}</h1>
+            <p class="email">Email: {{ user?.email }}</p>
+        </div>
     </div>
 </div>

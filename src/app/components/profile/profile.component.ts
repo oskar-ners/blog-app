@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -17,10 +17,12 @@ export class ProfileComponent {
   photoURL: string | null = null;
 
   async ngOnInit() {
-    const uid = this.auth.currentUser?.uid;
-    if (uid) {
-      this.user = await this.authService.getUserData(uid);
-      this.photoURL = this.user?.photoURL || null;
-    }
+    onAuthStateChanged(this.auth, async (user) => {
+      const uid = this.auth.currentUser?.uid;
+      if (user) {
+        this.user = await this.authService.getUserData(uid);
+        this.photoURL = this.user?.photoURL || null;
+      }
+    });
   }
 }

@@ -87,7 +87,7 @@ export class AuthService {
     }
   }
 
-  async getUserData(uid: string): Promise<any> {
+  async getUserData(uid: string | undefined): Promise<any> {
     const userDocRef = doc(this.firestore, `users/${uid}`);
     const userDoc = await getDoc(userDocRef);
     return userDoc.exists() ? userDoc.data() : null;
