@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Exo 2", sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background: linear-gradient(to bottom, #bbdefb, #90caf9);
+  min-height: 100vh;
+}
+
+button,
+input::placeholder,
+input,
+textarea,
+textarea::placeholder {
+  font-family: "Exo 2", sans-serif;
+}

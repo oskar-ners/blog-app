@@ -23,7 +23,6 @@
 </form>
 
 <!-- list of posts -->
-<h1>List of posts ({{blogPosts.length}})</h1>
 <div class="list-of-posts">
     @for(post of blogPosts; track post.title) {
     <div class="post">
@@ -50,10 +49,10 @@
         <img [src]="post.imageUrl"
              alt="Post image" />
         }
-        <button (click)="removePost(post)"
-                class="post-remove">Remove Post</button>
-        <button (click)="startEditing(post)"
-                class="edit-post">Edit Post</button>
+        <a (click)="removePost(post)"
+           class="post-remove"><i class="fa-solid fa-trash-can"></i></a>
+        <a (click)="startEditing(post)"
+           class="edit-post"><i class="fa-solid fa-pen"></i></a>
         }
     </div>
     }
