@@ -1,1 +1,14 @@
-<p>community works!</p>
+<div class="community">
+    @for(member of communityMembers; track member.email) {
+    <div class="community-person">
+        <div class="community-person-image">
+            <img [src]="member.photoURL"
+                 alt="Community person" />
+        </div>
+        <div class="community-person-details">
+            <h3 class="community-person-name">Username: {{ member.username }}</h3>
+            <h3 class="community-person-email">Email: {{ member.email }}</h3>
+        </div>
+    </div>
+    }
+</div>
