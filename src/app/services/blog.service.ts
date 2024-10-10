@@ -10,7 +10,6 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { BlogPost } from '../interfaces/blog-post.interface';
-import { onAuthStateChanged } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -99,7 +98,6 @@ export class BlogService {
 
   async getPosts(): Promise<BlogPost[]> {
     try {
-      onAuthStateChanged(this.firebaseAuth, async (user) => {});
       const user = this.firebaseAuth.currentUser;
       if (user) {
         const userDocRef = doc(this.firestore, `users/${user.uid}`);

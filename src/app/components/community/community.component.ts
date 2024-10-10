@@ -3,11 +3,12 @@ import { CommunityService } from '../../services/community.service';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Auth } from '@angular/fire/auth';
 import { CommunityMember } from '../../interfaces/community-member.interface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-community',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './community.component.html',
   styleUrl: './community.component.scss',
 })

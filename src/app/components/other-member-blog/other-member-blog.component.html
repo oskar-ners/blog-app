@@ -1,0 +1,17 @@
+<!-- author username -->
+<h2>Welcome on {{blogAuthorUsername}} Blog!</h2>
+
+<!-- list of posts -->
+<div class="list-of-posts">
+    @for(post of blogAuthorPosts; track post.title) {
+    <div class="post">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p class="post-description">{{ post.description }}</p>
+        <p class="post-date">{{ post.createdAt?.toDate() | date:'short' }}</p>
+        @if(post.imageUrl) {
+        <img [src]="post.imageUrl"
+             alt="Post image" />
+        }
+    </div>
+    }
+</div>

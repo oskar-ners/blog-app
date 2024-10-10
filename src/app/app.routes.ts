@@ -6,6 +6,7 @@ import { authGuard } from './guards/auth.guard';
 import { authLoggedInGuard } from './guards/auth-logged-in.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CommunityComponent } from './components/community/community.component';
+import { OtherMemberBlogComponent } from './components/other-member-blog/other-member-blog.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,11 @@ export const routes: Routes = [
   {
     path: 'community',
     component: CommunityComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'community/:username/:uid',
+    component: OtherMemberBlogComponent,
     canActivate: [authGuard],
   },
   {

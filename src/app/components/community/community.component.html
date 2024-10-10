@@ -1,6 +1,7 @@
 <div class="community">
     @for(member of communityMembers; track member.email) {
-    <div class="community-person">
+    <div [routerLink]="[member.username, member.uid]"
+         class="community-person">
         <div class="community-person-image">
             <img [src]="member.photoURL"
                  alt="Community person" />
