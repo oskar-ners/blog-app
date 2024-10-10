@@ -7,11 +7,18 @@ import { Auth } from '@angular/fire/auth';
 import { LogoutButtonComponent } from '../logout-button/logout-button.component';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import { NavComponent } from '../nav/nav.component';
 
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [FormsModule, AsyncPipe, DatePipe, LogoutButtonComponent],
+  imports: [
+    FormsModule,
+    AsyncPipe,
+    DatePipe,
+    LogoutButtonComponent,
+    NavComponent,
+  ],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.scss',
 })
@@ -83,6 +90,11 @@ export class BlogComponent implements OnInit {
     this.blogPosts = await this.blogService.getPosts();
     this.editTitle = '';
     this.editDescription = '';
+    this.editingPost = null;
+  }
+
+  switchEditMode(): void {
+    this.blogService.isEditMode.update((value) => !value);
     this.editingPost = null;
   }
 }

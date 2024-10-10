@@ -51,6 +51,19 @@ button {
   }
 }
 
+.switch-mode {
+  position: fixed;
+  left: 1%;
+  bottom: 1%;
+  background-color: red;
+  font-size: 14px;
+  transition: 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+    background-color: black;
+  }
+}
+
 .edit-post,
 .post-remove {
   position: absolute;

@@ -4,6 +4,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { authGuard } from './guards/auth.guard';
 import { authLoggedInGuard } from './guards/auth-logged-in.guard';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CommunityComponent } from './components/community/community.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +17,12 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [authLoggedInGuard],
+  },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  {
+    path: 'community',
+    component: CommunityComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'register',

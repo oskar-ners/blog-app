@@ -1,1 +1,6 @@
+<!-- navigation -->
+@if(authService.isLoggedIn | async) {
+<app-nav></app-nav>
+}
+
 <router-outlet></router-outlet>

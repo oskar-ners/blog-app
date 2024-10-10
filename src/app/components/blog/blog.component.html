@@ -1,6 +1,9 @@
-<app-logout-button></app-logout-button>
+<!-- switch edit mode -->
+<button class="switch-mode"
+        (click)="switchEditMode()">{{blogService.isEditMode() ? 'Edit Mode Off' : 'Edit Mode'}}</button>
 
 <!-- add post  -->
+@if(!blogService.isEditMode()) {
 <form class="add-post-form"
       #form="ngForm"
       (ngSubmit)="addPost(title, description)">
@@ -21,6 +24,11 @@
            (change)="onFileSelected($event)" />
     <button type="submit">Add Post</button>
 </form>
+}
+
+@if(blogService.isEditMode()) {
+<h1>In edit mode you can edit or remove your posts</h1>
+}
 
 <!-- list of posts -->
 <div class="list-of-posts">
@@ -49,10 +57,12 @@
         <img [src]="post.imageUrl"
              alt="Post image" />
         }
+        @if(blogService.isEditMode()) {
         <a (click)="removePost(post)"
            class="post-remove"><i class="fa-solid fa-trash-can"></i></a>
         <a (click)="startEditing(post)"
            class="edit-post"><i class="fa-solid fa-pen"></i></a>
+        }
         }
     </div>
     }

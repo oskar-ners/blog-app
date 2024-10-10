@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 import {
@@ -18,6 +18,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 export class BlogService {
   firestore = inject(Firestore);
   firebaseAuth = inject(Auth);
+
+  isEditMode = signal<boolean>(false);
 
   async addPost(
     title: string,
