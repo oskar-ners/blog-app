@@ -23,6 +23,7 @@ export class BlogComponent implements OnInit {
   editTitle: string = '';
   editDescription: string = '';
   blogPosts: BlogPost[] = [];
+  editingPost: BlogPost | null = null;
 
   async ngOnInit(): Promise<void> {
     onAuthStateChanged(this.firebaseAuth, async (user) => {
@@ -45,11 +46,22 @@ export class BlogComponent implements OnInit {
     this.blogPosts = await this.blogService.getPosts();
   }
 
-  async editPost(post: BlogPost): Promise<void> {
-    if (!this.editTitle || !this.editDescription) return;
-    await this.blogService.editPost(post, this.editTitle, this.editDescription);
+  startEditing(post: BlogPost): void {
+    this.editingPost = post;
+    this.editTitle = post.title;
+    this.editDescription = post.description;
+  }
+
+  async editPost(): Promise<void> {
+    if (!this.editTitle || !this.editDescription || !this.editingPost) return;
+    await this.blogService.editPost(
+      this.editingPost,
+      this.editTitle,
+      this.editDescription
+    );
     this.blogPosts = await this.blogService.getPosts();
     this.editTitle = '';
     this.editDescription = '';
+    this.editingPost = null;
   }
 }

@@ -23,7 +23,7 @@
 <div class="list-of-posts">
     @for(post of blogPosts; track post.title) {
     <div class="post">
-        @if(blogService.isEditing | async) {
+        @if(editingPost === post) {
         <input class="edit-post-title"
                type="text"
                name="edit-title"
@@ -35,13 +35,13 @@
                   id="edit-description"
                   placeholder="Edit description"
                   [(ngModel)]="editDescription"></textarea>
-        <button (click)="editPost(post)">Edit Post</button>
+        <button (click)="editPost()">Save Changes</button>
         } @else {
         <h2 class="post-title">{{ post.title }}</h2>
         <p class="post-description">{{ post.description }}</p>
         <button (click)="removePost(post)"
                 class="post-remove">Remove Post</button>
-        <button (click)="blogService.isEditing.next(true)"
+        <button (click)="startEditing(post)"
                 class="edit-post">Edit Post</button>
         }
     </div>

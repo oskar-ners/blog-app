@@ -19,9 +19,6 @@ export class BlogService {
   firestore = inject(Firestore);
   firebaseAuth = inject(Auth);
 
-  isEditing = new BehaviorSubject<boolean>(false);
-  isEditing$ = this.isEditing.asObservable();
-
   async addPost(title: string, description: string): Promise<void> {
     const uid = this.firebaseAuth.currentUser?.uid;
 
@@ -59,19 +56,26 @@ export class BlogService {
   ): Promise<void> {
     const uid = this.firebaseAuth.currentUser?.uid;
     try {
-      this.isEditing.next(false);
       const userDocRef = doc(this.firestore, `users/${uid}`);
-      await updateDoc(userDocRef, {
-        posts: arrayRemove(post),
-      });
-      const updatedPost = {
-        ...post,
-        title: editTitle,
-        description: editDescription,
-      };
-      await updateDoc(userDocRef, {
-        posts: arrayUnion(updatedPost),
-      });
+      const userDoc = await getDoc(userDocRef);
+      const posts = userDoc.data()?.['posts'] || [];
+
+      const postIndex = posts.findIndex(
+        (p: BlogPost) =>
+          p.title === post.title && p.description === post.description
+      );
+
+      if (postIndex !== -1) {
+        posts[postIndex] = {
+          ...posts[postIndex],
+          title: editTitle,
+          description: editDescription,
+        };
+
+        await updateDoc(userDocRef, {
+          posts: posts,
+        });
+      }
     } catch (error) {
       console.warn(
         'Something went wrong when you tried to edit a post!',
