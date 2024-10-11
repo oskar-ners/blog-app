@@ -30,6 +30,7 @@ export class BlogService {
     try {
       const userDocRef = doc(this.firestore, `users/${uid}`);
       const post = {
+        id: Math.random().toString(36).substr(2, 9),
         title: title,
         description: description,
         imageUrl: imageUrl,

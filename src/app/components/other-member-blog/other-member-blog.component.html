@@ -12,6 +12,28 @@
         <img [src]="post.imageUrl"
              alt="Post image" />
         }
+        <div class="post-comments">
+            <h1>Add Comment</h1>
+            <form #form="ngForm"
+                  (ngSubmit)="addComment(post.id)">
+                <input type="text"
+                       name="new-comment"
+                       id="new-comment"
+                       [(ngModel)]="newComment"
+                       placeholder="Type a comment..." />
+                <button type="submit">Add Comment</button>
+            </form>
+
+            @for(comment of post.comments; track comment.id) {
+            <div class="comment">
+                <img [src]="comment.photoURL"
+                     alt="Post image" />
+                <p class="comment-content">{{ comment.text }}</p>
+                <p class="comment-date">{{ comment.createdAt.toDate() | date:'short' }}</p>
+
+            </div>
+            }
+        </div>
     </div>
     }
 </div>

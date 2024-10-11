@@ -55,6 +55,74 @@ img {
   margin-top: 10px;
 }
 
+.post-comments {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.post-comments h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.post-comments form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.post-comments input[type="text"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.post-comments button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.comment img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.comment-content {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #333;
+}
+
+.comment-date {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 5px;
+}
+
 @media (max-width: 768px) {
   .list-of-posts {
     padding: 0 10px;
@@ -74,5 +142,21 @@ img {
 
   .post-description {
     font-size: 1.1rem;
+  }
+
+  .post-comments h1 {
+    font-size: 1.3rem;
+  }
+
+  .post-comments input[type="text"] {
+    font-size: 0.9rem;
+  }
+
+  .comment-content {
+    font-size: 0.9rem;
+  }
+
+  .comment-date {
+    font-size: 0.7rem;
   }
 }
