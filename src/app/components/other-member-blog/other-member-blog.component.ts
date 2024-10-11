@@ -49,7 +49,12 @@ export class OtherMemberBlogComponent implements OnInit {
       createdAt: Timestamp.now(),
       photoURL: userDoc.data()?.['photoURL'],
     };
-    this.commentService.addComment(postId, newComment, this.blogAuthorPosts);
+    await this.commentService.addComment(
+      postId,
+      newComment,
+      this.blogAuthorPosts,
+      this.blogAuthorUid
+    );
     this.newComment = '';
   }
 }
