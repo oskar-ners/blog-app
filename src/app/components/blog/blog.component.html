@@ -64,6 +64,24 @@
            class="edit-post"><i class="fa-solid fa-pen"></i></a>
         }
         }
+        <div class="comments">
+            <h3 class="comments-title">{{ post.comments.length }} Comments</h3>
+            @for(comment of post.comments; track comment.id) {
+            <div class="comment">
+                <div class="comment-avatar">
+                    <img [src]="comment.photoURL"
+                         alt="User avatar" />
+                </div>
+                <div class="comment-body">
+                    <div class="comment-header">
+                        <h4 class="comment-author">{{ comment.author }}</h4>
+                        <span class="comment-date">{{ comment.createdAt.toDate() | date:'short' }}</span>
+                    </div>
+                    <p class="comment-content">{{ comment.text }}</p>
+                </div>
+            </div>
+            }
+        </div>
     </div>
     }
 </div>

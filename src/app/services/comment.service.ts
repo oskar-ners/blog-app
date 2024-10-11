@@ -14,7 +14,8 @@ export class CommentService {
     postId: string,
     newComment: Comment,
     posts: BlogPost[],
-    authorUid: string
+    authorUid: string,
+    authorUsername: string
   ): Promise<void> {
     const post = posts.find((post) => post.id === postId);
     if (!post) return;

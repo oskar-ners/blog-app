@@ -48,12 +48,14 @@ export class OtherMemberBlogComponent implements OnInit {
       text: this.newComment,
       createdAt: Timestamp.now(),
       photoURL: userDoc.data()?.['photoURL'],
+      author: userDoc.data()?.['username'],
     };
     await this.commentService.addComment(
       postId,
       newComment,
       this.blogAuthorPosts,
-      this.blogAuthorUid
+      this.blogAuthorUid,
+      this.blogAuthorUsername
     );
     this.newComment = '';
   }

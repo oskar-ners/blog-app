@@ -28,6 +28,7 @@
             <div class="comment">
                 <img [src]="comment.photoURL"
                      alt="Post image" />
+                <p class="comment-author">{{ comment.author }}</p>
                 <p class="comment-content">{{ comment.text }}</p>
                 <p class="comment-date">{{ comment.createdAt.toDate() | date:'short' }}</p>
 

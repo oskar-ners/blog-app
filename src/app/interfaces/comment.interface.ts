@@ -5,4 +5,5 @@ export interface Comment {
   text: string;
   createdAt: Timestamp;
   photoURL: string | null | undefined;
+  author: string;
 }
